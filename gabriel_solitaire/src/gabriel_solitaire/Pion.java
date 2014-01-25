@@ -58,10 +58,10 @@ public class Pion {
 		try {
 			switch (direction) {
 			case Bas:
-				caseIntermediaire = plateau.getCase(x, y - 1);
+				caseIntermediaire = plateau.getCase(x, y + 1);
 				break;
 			case Haut:
-				caseIntermediaire = plateau.getCase(x, y + 1);
+				caseIntermediaire = plateau.getCase(x, y - 1);
 				break;
 			case Droite:
 				caseIntermediaire = plateau.getCase(x + 1, y);
@@ -76,10 +76,10 @@ public class Pion {
 
 			switch (direction) {
 			case Bas:
-				caseVoulu = plateau.getCase(xSuivant, ySuivant - 1);
+				caseVoulu = plateau.getCase(xSuivant, ySuivant + 1);
 				break;
 			case Haut:
-				caseVoulu = plateau.getCase(xSuivant, ySuivant + 1);
+				caseVoulu = plateau.getCase(xSuivant, ySuivant - 1);
 				break;
 			case Droite:
 				caseVoulu = plateau.getCase(xSuivant + 1, ySuivant);
@@ -91,6 +91,7 @@ public class Pion {
 
 		} catch (IllegalArgumentException e) {
 			System.out.println("Mauvais mouvement");
+			return false;
 		}
 
 		return caseVoulu.libre();

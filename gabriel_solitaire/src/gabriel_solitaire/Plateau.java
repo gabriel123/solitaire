@@ -36,6 +36,10 @@ public class Plateau {
 
 	}
 
+	public Case[][] getPlateau() {
+		return plateau;
+	}
+
 	/**
 	 * parcoure le plateau en faisant attention aux cases interdites et affiche
 	 * le plateau
@@ -73,7 +77,10 @@ public class Plateau {
 	 *             plateau)
 	 */
 	public Case getCase(int x, int y) throws IllegalArgumentException {
-		if (x < 0 || x > plateau.length) {
+		if (x < 0 || x >= plateau.length) {
+			throw new IllegalArgumentException();
+		}
+		if (y < 0 || y >= plateau.length) {
 			throw new IllegalArgumentException();
 		}
 		return plateau[x][y];
