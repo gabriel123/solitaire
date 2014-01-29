@@ -1,6 +1,7 @@
 package testUnitaire;
 
 import gabriel_solitaire.Plateau;
+import graphique.PlateauGraphique;
 
 import org.junit.Test;
 
@@ -20,4 +21,17 @@ public class TestSolitaire {
 
 	}
 
+	@Test
+	public void voirPlateau() {
+		Plateau plateau = new Plateau();
+		PlateauGraphique plateauGraphique = new PlateauGraphique(plateau);
+		plateauGraphique.setVisible(true);
+
+	}
+
+	@Test
+	public void voirPlateauConsole() {
+		Plateau plateau = new Plateau();
+		plateau.afficheConsole();
+	}
 }

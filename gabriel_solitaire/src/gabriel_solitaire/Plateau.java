@@ -76,13 +76,35 @@ public class Plateau {
 	 *             envoyee lorsque les valeurs sont incorrects (depasse le
 	 *             plateau)
 	 */
-	public Case getCase(int x, int y) throws IllegalArgumentException {
+	public Case getCase(int y, int x) throws IllegalArgumentException {
 		if (x < 0 || x >= plateau.length) {
 			throw new IllegalArgumentException();
 		}
 		if (y < 0 || y >= plateau.length) {
 			throw new IllegalArgumentException();
 		}
-		return plateau[x][y];
+		return plateau[y][x];
+	}
+
+	/**
+	 * renvoit la case par rapport a la direction de la case selectionnée
+	 * 
+	 * @param y
+	 * @param x
+	 * @param direction
+	 * @return
+	 */
+	public Case getCaseAvecDirection(int y, int x, Direction direction) {
+		switch (direction) {
+		case Bas:
+			return plateau[y + 1][x];
+		case Droite:
+			return plateau[y][x + 1];
+		case Gauche:
+			return plateau[y][x - 1];
+		case Haut:
+			return plateau[y - 1][x];
+		}
+		return null;
 	}
 }

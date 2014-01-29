@@ -24,25 +24,27 @@ public class PlateauGraphique extends JFrame {
 		getContentPane().setLayout(new GridLayout(7, 7));
 		cases = new CaseGraphique[7][7];
 
-		for (int x = 0; x < plateau.getPlateau().length; ++x) {
-			for (int y = 0; y < plateau.getPlateau()[x].length; ++y) {
+		for (int y = 0; y < plateau.getPlateau().length; ++y) {
+			for (int x = 0; x < plateau.getPlateau()[y].length; ++x) {
 
 				// On recupere chaque case de notre plateau et on les creer en
 				// graphique avec des boutons qu'on marque differement si la
 				// case est libre ou pas.
 				// Si c'est une case interdite, on ne marque pas la case.
 
-				Case cellule = plateau.getCase(x, y);
+				Case cellule = plateau.getCase(y, x);
 				if (cellule != null) {
-					cases[x][y] = new CaseGraphique(plateau, x, y);
+
+					cases[y][x] = new CaseGraphique(plateau, y, x, cases);
 					if (cellule.libre()) {
-						cases[x][y].setText("0");
+						cases[y][x].setText("0");
 					} else {
-						cases[x][y].setText("X");
+						cases[y][x].setText("X");
 					}
-					getContentPane().add(cases[x][y]);
+					getContentPane().add(cases[y][x]);
 				} else {
-					getContentPane().add(new CaseGraphique(plateau, x, y));
+					getContentPane().add(
+							new CaseGraphique(plateau, y, x, cases));
 				}
 			}
 		}

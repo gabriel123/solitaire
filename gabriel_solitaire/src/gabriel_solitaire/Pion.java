@@ -13,7 +13,7 @@ public class Pion {
 	 * 
 	 * @param plateau
 	 */
-	public Pion(Plateau plateau, int x, int y) {
+	public Pion(Plateau plateau, int y, int x) {
 		this.plateau = plateau;
 		this.x = x;
 		this.y = y;
@@ -58,16 +58,16 @@ public class Pion {
 		try {
 			switch (direction) {
 			case Bas:
-				caseIntermediaire = plateau.getCase(x, y + 1);
+				caseIntermediaire = plateau.getCase(y + 1, x);
 				break;
 			case Haut:
-				caseIntermediaire = plateau.getCase(x, y - 1);
+				caseIntermediaire = plateau.getCase(y - 1, x);
 				break;
 			case Droite:
-				caseIntermediaire = plateau.getCase(x + 1, y);
+				caseIntermediaire = plateau.getCase(y, x + 1);
 				break;
 			case Gauche:
-				caseIntermediaire = plateau.getCase(x - 1, y);
+				caseIntermediaire = plateau.getCase(y, x - 1);
 				break;
 			}
 
@@ -76,16 +76,16 @@ public class Pion {
 
 			switch (direction) {
 			case Bas:
-				caseVoulu = plateau.getCase(xSuivant, ySuivant + 1);
+				caseVoulu = plateau.getCase(ySuivant + 1, xSuivant);
 				break;
 			case Haut:
-				caseVoulu = plateau.getCase(xSuivant, ySuivant - 1);
+				caseVoulu = plateau.getCase(ySuivant - 1, xSuivant);
 				break;
 			case Droite:
-				caseVoulu = plateau.getCase(xSuivant + 1, ySuivant);
+				caseVoulu = plateau.getCase(ySuivant, xSuivant + 1);
 				break;
 			case Gauche:
-				caseVoulu = plateau.getCase(xSuivant - 1, ySuivant);
+				caseVoulu = plateau.getCase(ySuivant, xSuivant - 1);
 				break;
 			}
 

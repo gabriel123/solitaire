@@ -10,8 +10,8 @@ public class Case {
 	 * 
 	 * @param plateau
 	 */
-	public Case(Plateau plateau, int x, int y) {
-		pion = new Pion(plateau, x, y);
+	public Case(Plateau plateau, int y, int x) {
+		pion = new Pion(plateau, y, x);
 		this.x = x;
 		this.y = y;
 	}
@@ -34,6 +34,22 @@ public class Case {
 
 	public void setPion(Pion pion) {
 		this.pion = pion;
+	}
+
+	public int getX() {
+		return x;
+	}
+
+	public void setX(int x) {
+		this.x = x;
+	}
+
+	public int getY() {
+		return y;
+	}
+
+	public void setY(int y) {
+		this.y = y;
 	}
 
 }

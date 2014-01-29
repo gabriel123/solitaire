@@ -13,7 +13,7 @@ public class Solitaire implements Jeu {
 
 	@Override
 	public void jouer() {
-		plateau.afficheConsole();
+
 		graphique.setVisible(true);
 	}
 

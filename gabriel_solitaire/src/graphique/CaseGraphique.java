@@ -52,9 +52,36 @@ public class CaseGraphique extends JButton {
 				return;
 			}
 
-			Case actuelle = plateau.getCase(x, y);
-			System.out.println(actuelle.getPion().peutBouger(direction));
+			Case actuelle = plateau.getCase(y, x);
+
 			if (actuelle.getPion().peutBouger(direction)) {
+				// recupere la case avec le pion a supprimé
+				Case aenlever = plateau.getCaseAvecDirection(y, x, direction);
+				// on enleve le pion
+				aenlever.setPion(null);
+				// la case est vide
+				aenlever.setLibre(true);
+				// on enleve le pion graphiquement
+				cases[aenlever.getY()][aenlever.getX()].setText("0");
+
+				// +1 de la case que tu a mangé
+				Case nouvelleCase = plateau.getCaseAvecDirection(
+						aenlever.getY(), aenlever.getX(), direction);
+				// je mets le pion sur sa nouvelle case
+				nouvelleCase.setPion(actuelle.getPion());
+				// la case est occupée
+				nouvelleCase.setLibre(false);
+				nouvelleCase.getPion().setX(nouvelleCase.getX());
+				nouvelleCase.getPion().setY(nouvelleCase.getY());
+				cases[nouvelleCase.getY()][nouvelleCase.getX()].setText("X");
+
+				// on dit que la case est libre a présent
+				actuelle.setPion(null);
+				actuelle.setLibre(true);
+				cases[actuelle.getY()][actuelle.getX()].setText("0");
+
+				System.out.println("Pion mangé à la case (" + aenlever.getX()
+						+ "," + aenlever.getY() + ")");
 
 			} else {
 				System.out.println("Déplacement impossible !");
@@ -69,12 +96,14 @@ public class CaseGraphique extends JButton {
 		}
 	};
 
-	private final int x, y;
+	private int x, y;
+	private CaseGraphique cases[][];
 
-	public CaseGraphique(Plateau plateau, final int x, final int y) {
+	public CaseGraphique(Plateau plateau, int y, int x, CaseGraphique cases[][]) {
 		this.plateau = plateau;
 		this.x = x;
 		this.y = y;
+		this.cases = cases;
 
 		setSize(20, 20);
 
@@ -85,7 +114,7 @@ public class CaseGraphique extends JButton {
 			@Override
 			public void actionPerformed(ActionEvent arg0) {
 				String typeDeCase = getText();
-				System.out.println(x + " " + y);
+
 				if (typeDeCase == "0") {
 
 				} else if (typeDeCase == "X") {
@@ -96,8 +125,10 @@ public class CaseGraphique extends JButton {
 					// clavier et si c'est une fleche, on agit, sinon on fait
 					// rien.
 					// Ensuite, on arrete d'enregistrer.
-
-					addKeyListener(enregistreurClavier);
+					if (getKeyListeners().length == 0) {
+						addKeyListener(enregistreurClavier); // permet d'écouter
+																// le clavier
+					}
 				} else {
 					System.out.println("Mauvaise case !");
 				}
