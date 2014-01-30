@@ -16,6 +16,16 @@ public class Case {
 		this.y = y;
 	}
 
+	@Override
+	public String toString() {
+		if (libre()) {
+			return ("0");
+		} else {
+			return ("X");
+		}
+
+	}
+
 	/**
 	 * 
 	 * @return la case est pleine par default

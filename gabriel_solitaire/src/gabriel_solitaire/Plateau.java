@@ -13,23 +13,15 @@ public class Plateau {
 				plateau[i][j] = new Case(this, i, j);
 			}
 		// on retire les mauvaises cases (partie haute)
-		plateau[0][0] = null;
-		plateau[0][1] = null;
-		plateau[1][0] = null;
-		plateau[1][1] = null;
-		plateau[0][5] = null;
-		plateau[0][6] = null;
-		plateau[1][5] = null;
-		plateau[1][6] = null;
-		// partie basse
-		plateau[5][0] = null;
-		plateau[6][0] = null;
-		plateau[5][1] = null;
-		plateau[6][1] = null;
-		plateau[5][5] = null;
-		plateau[5][6] = null;
-		plateau[6][5] = null;
-		plateau[6][6] = null;
+
+		for (int i = 0; i < 7; ++i)
+			for (int j = 0; j < 7; ++j) {
+				if (i == 2)
+					i = 5;
+				if (j == 2)
+					j = 5;
+				plateau[i][j] = null;
+			}
 
 		// On dit quelle case est libre
 		plateau[3][3].setLibre(true);
@@ -44,7 +36,8 @@ public class Plateau {
 	 * parcoure le plateau en faisant attention aux cases interdites et affiche
 	 * le plateau
 	 */
-	public void afficheConsole() {
+	public String afficheConsole() {
+		String toto = "";
 		for (int i = 0; i < plateau.length; ++i) {
 			Case[] ligne = plateau[i];
 
@@ -52,17 +45,15 @@ public class Plateau {
 				Case cellule = plateau[i][j];
 
 				if (cellule == null) {
-					System.out.print(" ");
-				} else if (cellule.libre()) {
-					System.out.print("0");
-				} else {
-					System.out.print("X");
-				}
+					toto = toto + " ";
+				} else
+					toto = toto + cellule.toString();
 
 			}
-			System.out.println();
+			toto += "\n";
 		}
 
+		return toto;
 	}
 
 	/**
